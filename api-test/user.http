@@ -1,0 +1,32 @@
+@BASE_URL=http://localhost:8000/api/user
+@CONTENT_TYPE=Content-Type:application/json
+
+###获取用户列表API
+get {{BASE_URL}}/get_user_list
+
+###注册API
+post {{BASE_URL}}/register
+{{CONTENT_TYPE}}
+
+{
+    "username": "达伦利001",
+    "password": "12345678"
+}
+
+###登陆API
+post {{BASE_URL}}/login
+Authorization: Bearer dsdfdsfdsjhfkdhskjh
+
+{
+    "username": "达伦利",
+    "password": "123456"
+}
+
+###获取个人信息API
+post {{BASE_URL}}/profile
+{{CONTENT_TYPE}}
+
+{
+    "username": "达伦利",
+    "password": "123456"
+}

@@ -1,4 +1,14 @@
-const express = require('express')
+const express = require("express");
+import userRouter from "./routers/UserRouter";
+
+const port = 8000;
+
 const app = express();
 
-app.listen(8000, () => {'express is running'})
+app.use(userRouter);
+app.use(express.json());
+
+//服务监听
+app.listen(port, () => {
+  console.log(`server is running at port ${port}`);
+});
