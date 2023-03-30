@@ -6,6 +6,7 @@ import { config as dotEnvConfig } from "dotenv";
 
 dotEnvConfig();
 
+//引用全局环境变量的私钥
 const { SECRET_KEY } = process.env;
 
 export interface IUserInfo {
@@ -14,6 +15,8 @@ export interface IUserInfo {
 }
 
 export async function getUserList(req: Request, res: Response) {
+  console.log("<-Cotroller-getUserList");
+
   const users = await UserModel.getUserList();
 
   res.status(200).json({
@@ -26,14 +29,6 @@ export async function getUserList(req: Request, res: Response) {
 export async function register(req: Request, res: Response) {
   //获取用户输入字段
   const { username, password }: IUserInfo = req.body;
-
-  //验证用户输入字段
-  if (username.length < 6 || password.length < 6) {
-    return res.status(403).json({
-      err_code: 1001,
-      err_msg: "Invalid username or password length",
-    });
-  }
 
   try {
     //添加用户到数据库
@@ -56,6 +51,8 @@ export async function register(req: Request, res: Response) {
 
 export async function login(req: Request, res: Response, next: NextFunction) {
   const { username, password }: IUserInfo = req.body;
+
+  //查询用户是否存在
   const userInfo = await UserModel.getUser(username);
 
   if (!userInfo) {
@@ -76,23 +73,51 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     });
   }
 
-  const userToken = jwt.sign(
+  //使用jsonwebtoken创建token
+  const Token = jwt.sign(
     {
       id: String(userInfo._id),
     },
     SECRET_KEY!,
     {
-      expiresIn: "2h",
+      expiresIn: "60s",
     }
   );
+
+  // 返回登陆用户信息与token
+  res.status(201).json({
+    err_code: 0,
+    err_msg: "Authentication passed",
+    data: {
+      username: userInfo.username,
+      level: userInfo.level,
+      token: Token,
+    },
+  });
 }
 
-export async function getProfile(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function checkLogin(req: Request, res: Response) {
   res.status(200).json({
-    message: "Profile",
+    err_code: 0,
+    err_msg: "ok",
+  });
+}
+
+export async function getProfile(req: Request, res: Response) {
+  console.log("<-Cotroller-getProfile");
+
+  const { id } = req;
+
+  const userInfo = await UserModel.getProfile(id!);
+
+  if (!userInfo) {
+    console.log("userInfo is not exist");
+
+    return;
+  }
+  res.status(200).json({
+    err_code: 0,
+    err_msg: "ok",
+    data: userInfo,
   });
 }

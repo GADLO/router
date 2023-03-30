@@ -9,24 +9,19 @@ post {{BASE_URL}}/register
 {{CONTENT_TYPE}}
 
 {
-    "username": "达伦利001",
+    "username": "xiaoye1",
     "password": "12345678"
 }
 
 ###登陆API
 post {{BASE_URL}}/login
-Authorization: Bearer dsdfdsfdsjhfkdhskjh
+{{CONTENT_TYPE}}
 
 {
-    "username": "达伦利",
-    "password": "123456"
+   "username": "xiaoye",
+   "password": "12345678"
 }
 
 ###获取个人信息API
 post {{BASE_URL}}/profile
-{{CONTENT_TYPE}}
-
-{
-    "username": "达伦利",
-    "password": "123456"
-}
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjRlZjM5ZjMyMzU0NjBhMGI5MmY4YyIsImlhdCI6MTY4MDE1NTcwMywiZXhwIjoxNjgwMTU1NzYzfQ.u3WrKnjhO3iLEBW_2BN5pGguCqdaJBxFy-AsnEnBs6w
