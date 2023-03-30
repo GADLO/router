@@ -9,7 +9,7 @@ post {{BASE_URL}}/register
 {{CONTENT_TYPE}}
 
 {
-    "username": "xiaoye1",
+    "username": "xiaoye2",
     "password": "12345678"
 }
 
