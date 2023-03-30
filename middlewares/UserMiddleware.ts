@@ -35,7 +35,7 @@ export async function checkAuth(
   } catch (e) {
     res.status(200).json({
       err_code: 1007,
-      er_msg: "Token verify falied",
+      er_msg: "Token verify failed",
     });
   }
   next();
