@@ -26,6 +26,7 @@ export async function getUserList(req: Request, res: Response) {
   });
 }
 
+//注册
 export async function register(req: Request, res: Response) {
   //获取用户输入字段
   const { username, password }: IUserInfo = req.body;
@@ -49,6 +50,7 @@ export async function register(req: Request, res: Response) {
   }
 }
 
+//登录
 export async function login(req: Request, res: Response, next: NextFunction) {
   const { username, password }: IUserInfo = req.body;
 
@@ -96,6 +98,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
   });
 }
 
+//验证登录状态
 export async function checkLogin(req: Request, res: Response) {
   res.status(200).json({
     err_code: 0,
@@ -103,6 +106,7 @@ export async function checkLogin(req: Request, res: Response) {
   });
 }
 
+//获取个人信息
 export async function getProfile(req: Request, res: Response) {
   console.log("<-Cotroller-getProfile");
 
