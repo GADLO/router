@@ -12,7 +12,7 @@
         注册
         </router-link>
 
-        <button @click="submitLogin" >
+        <button @click="" >
         登录
         </button>
     </p>
@@ -20,6 +20,19 @@
 </template>
 
 <script setup lang='ts'>
+import { useLogin, useStorage } from './hooks/user';
+  import errorHandler from '@/config/errorHandle';
+  import { useRouter } from 'vue-router';
+
+  const {
+    username,
+    password,
+    checkUserInfo,
+    submitUserInfo
+  } = useLogin();
+
+
+
 
 </script>
 
