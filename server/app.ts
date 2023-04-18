@@ -1,4 +1,5 @@
 const express = require("express");
+const { join } = require("path");
 import userRouter from "./routers/UserRouter";
 
 const port = 8000;
@@ -25,11 +26,14 @@ app.all(
       "content-type, Origin, Authorization"
     );
 
-    res.header("Content-Type", "application/json;charset=utf-8");
+    // res.header("Content-Type", "application/json;charset=utf-8");
+    res.header("Content-Type", "text/html");
+
     next();
   }
 );
 
+app.use(express.static(join(__dirname, "public")));
 app.use(userRouter);
 app.use(express.json());
 
